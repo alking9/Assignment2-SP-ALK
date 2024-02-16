@@ -32,12 +32,12 @@ function apiSearch() {
 
         $('#searchResults').html(search); 
         $('#searchResults').dialog({
-            width: 400, // Set the width of the dialog box
-            height: 400, // Let jQuery UI determine the height automatically
-            position: { my: "center", at: "center", of: window }, // Position the dialog box at the center of the window
-            resizable: true, // Disable resizing of the dialog box
-            draggable: true, // Enable dragging of the dialog box
-            modal: true // Make the dialog box modal (blocks interaction with the rest of the page)
+            width: 400, 
+            height: 400, 
+            position: { my: "center", at: "center", of: window }, 
+            resizable: true, 
+            draggable: true, 
+            modal: true 
         }); 
         })
         .fail(function () {
@@ -45,7 +45,6 @@ function apiSearch() {
         })
 
         .always(function () {
-            // Reset the button text after the search is complete
             $('#searchButton').html('Search');
         });
 
