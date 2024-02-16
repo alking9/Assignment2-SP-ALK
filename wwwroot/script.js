@@ -30,14 +30,33 @@ function apiSearch() {
                 search = "<p>No results found.</p>";
             }
 
-            $('#searchResults').html(search); 
-            $('#searchResults').dialog(); 
+        $('#searchResults').html(search); 
+        $('#searchResults').dialog({
+            width: 400, // Set the width of the dialog box
+            height: 400, // Let jQuery UI determine the height automatically
+            position: { my: "center", at: "center", of: window }, // Position the dialog box at the center of the window
+            resizable: true, // Disable resizing of the dialog box
+            draggable: true, // Enable dragging of the dialog box
+            modal: true // Make the dialog box modal (blocks interaction with the rest of the page)
+        }); 
         })
         .fail(function () {
             alert("error");
+        })
+
+        .always(function () {
+            // Reset the button text after the search is complete
+            $('#searchButton').html('Search');
         });
 
 }
+document.getElementById('searchButton').addEventListener('click', function () {
+
+    $('#searchButton').html('<span class="spinner-border spinner-border-sm"></span> Loading..');
+
+
+    apiSearch();
+});
 
 function changeBackgroundImage() {
     var body = document.querySelector("body");
@@ -61,29 +80,18 @@ document.getElementById('searchEngineName').addEventListener('click', changeBack
 
 
 function displayCurrentTime() {
-    document.getElementById('showTimeButton').addEventListener('click', function () {
-        var currentTime = new Date();
-        var formattedTime = currentTime.getHours() + ':' + ('0' + currentTime.getMinutes()).slice(-2);
-        document.getElementById('time').textContent = 'Current Time: ' + formattedTime;
+    var currentTime = new Date();
+    var formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('time').textContent = 'Current Time: ' + formattedTime;
 
-        $("#time").dialog({
-            title: "Current Time",
-            modal: true,
-            width: 300
-        });
+    $("#time").dialog({
+        title: "Current Time",
+        modal: true,
+        width: 300
     });
 }
 
-document.getElementById('showTimeButton').addEventListener('click', function () {
-    var timeDiv = document.getElementById('time');
-    var currentTime = new Date();
-    timeDiv.textContent = 'Current Time: ' + currentTime.toLocaleTimeString();
-});
-
-document.getElementById('searchButton').addEventListener('click', function () {
-    apiSearch();
-});
-
+document.getElementById('showTimeButton').addEventListener('click', displayCurrentTime);
 
 $(document).ready(function () {
     $('#searchEngineName').click(changeBackgroundImage); 

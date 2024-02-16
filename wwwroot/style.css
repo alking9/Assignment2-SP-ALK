@@ -3,13 +3,13 @@ body {
     background-size: cover;
     background-position: center;
     color: white;
-
 }
 
 #searchEngineName {
     text-align: center;
     color: white;
-    
+    font-family: "Audiowide", sans-serif;
+    font-weight: bold;
 }
 
  #searchResults, #time{
